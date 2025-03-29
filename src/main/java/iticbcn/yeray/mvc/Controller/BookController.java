@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.support.SessionStatus;
 
 import iticbcn.yeray.mvc.Model.Llibre;
 import iticbcn.yeray.mvc.Model.Usuaris;
@@ -134,5 +135,17 @@ public class BookController {
 
         return "cercaid";
 
+    }
+
+    @PostMapping("/logout")
+    public String logout(SessionStatus status) {
+        status.setComplete();
+        return "redirect:/";
+    }
+
+
+    @ModelAttribute("users")
+    public Usuaris getDefaultUser() {
+        return new Usuaris(); 
     }
 }
