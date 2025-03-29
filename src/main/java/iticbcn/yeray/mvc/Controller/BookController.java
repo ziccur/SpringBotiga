@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import iticbcn.yeray.mvc.Model.Llibre;
@@ -75,6 +76,32 @@ public class BookController {
 
     }
 
+        @PostMapping("/inserir")
+    public String inserir(@ModelAttribute("users") Usuaris users, 
+                          @RequestParam(name = "idLlibre") String idLlibre,
+                          @RequestParam(name = "titol") String titol,  
+                          @RequestParam(name = "autor") String autor,
+                          @RequestParam(name = "editorial") String editorial,  
+                          @RequestParam(name = "datapublicacio") String datapublicacio,
+                          @RequestParam(name = "tematica") String tematica,
+                          Model model) {
 
+        String message = "";
+        boolean llibreErr = false;
 
+        if (idLlibre == null || !idLlibre.matches("\\d+")) {
+            message = "La id de llibre ha de ser un nombre enter";
+            llibreErr = true;
+            model.addAttribute("message", message);
+            model.addAttribute("llibreErr", llibreErr);
+            return "inserir";
+        } else {
+            int idL = Integer.parseInt(idLlibre);
+            Llibre llibre = new Llibre(idL,titol,autor,editorial,datapublicacio,tematica);
+            repoll.InsertaLlibre(llibre);
+            ArrayList<Llibre> llibres = repoll.getAllLlibres();
+            model.addAttribute("llibres", llibres);
+            return "consulta";            
+        }
+    }
 }
