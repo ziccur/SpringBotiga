@@ -104,4 +104,35 @@ public class BookController {
             return "consulta";            
         }
     }
+
+    @PostMapping("/cercaid")
+    public String cercaId(@ModelAttribute("users") Usuaris users,
+                          @RequestParam(name = "idLlibre", required = false) String idLlibre, 
+                          Model model) {
+        
+        int idLlib = 0;
+        String message = "";
+        boolean llibreErr = false;
+
+        try {
+            idLlib = Integer.parseInt(idLlibre);
+            Llibre llibre = repoll.getLlibreID(idLlib);
+            if(llibre !=null) {
+                model.addAttribute("llibre", llibre);
+            } else {
+                message = "No hi ha cap llibre amb aquesta id";
+                llibreErr = true;
+            }
+
+        } catch (Exception e) {
+            message = "La id de llibre ha de ser un nombre enter";
+            llibreErr = true;
+        } 
+        
+        model.addAttribute("message", message);
+        model.addAttribute("llibreErr",llibreErr);
+
+        return "cercaid";
+
+    }
 }
