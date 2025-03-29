@@ -1,5 +1,7 @@
 package iticbcn.yeray.mvc.Controller;
 
+import java.util.ArrayList;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -8,6 +10,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import iticbcn.yeray.mvc.Model.Llibre;
 import iticbcn.yeray.mvc.Model.Usuaris;
 import iticbcn.yeray.mvc.Repository.RepoLlibre;
 
@@ -35,5 +38,43 @@ public class BookController {
             return "login";
         }        
     }
+
+    @GetMapping("/index")
+    public String index(@ModelAttribute("users") Usuaris users, Model model) {
+
+            return "index";
+        
+    }
+
+    @GetMapping("/consulta") 
+    public String consulta(@ModelAttribute("users") Usuaris users,Model model) {
+
+        ArrayList<Llibre> llibres = repoll.getAllLlibres();
+
+        model.addAttribute("llibres", llibres);
+        
+        return "consulta";
+    }
+
+    @GetMapping("/inserir") 
+    public String inputInserir(@ModelAttribute("users") Usuaris users,Model model) {
+        
+        return "inserir";
+    }
+    
+        @GetMapping("/cercaid")
+    public String inputCerca(@ModelAttribute("users") Usuaris users, Model model) {
+
+        Llibre llibre = new Llibre();
+        llibre.setIdLlibre(0);
+        model.addAttribute("llibreErr", true);
+        model.addAttribute("message", "");
+        model.addAttribute("llibre", llibre);
+
+        return "cercaid";
+
+    }
+
+
 
 }
