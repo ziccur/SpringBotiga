@@ -19,7 +19,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class Llibre {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY) 
     private int idLlibre;
 
     @Column(nullable = false)
@@ -37,6 +37,6 @@ public class Llibre {
     @Column(nullable = false)
     private String tematica;
 
-    @Column(unique = true, nullable = false)
+    @Column(unique = true, nullable = false) 
     private String isbn;
 }
