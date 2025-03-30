@@ -1,25 +1,60 @@
 body {
-    background-color: #f0f0f0;
-    font-family: Arial, sans-serif;
-    color: #333;
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 h1 {
-    color: #007bff;
-    text-align: center;
-    margin-top: 50px;
+    background: linear-gradient(45deg, #2c3e50, #3498db);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    font-size: 2.8rem;
+    padding: 2rem 0;
+    margin: 2rem auto;
+    width: fit-content;
 }
 
 p {
-    text-align: center;
-    font-size: 18px;
+    margin: 1.5rem auto;
 }
 
 a {
-    color: #007bff;
-    text-decoration: none;
+    color: #2980b9 !important;
+    font-weight: 500;
+    padding: 0.5rem;
+    position: relative;
 }
 
 a:hover {
-    text-decoration: underline;
+    color: #e74c3c !important;
+    text-decoration: none;
+}
+
+a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: #e74c3c;
+    transition: width 0.3s ease;
+}
+
+a:hover::after {
+    width: 100%;
+}
+
+form input[type="submit"] {
+    background: linear-gradient(45deg, #27ae60, #2ecc71);
+    border: none;
+    padding: 1rem 2rem;
+    color: white;
+    border-radius: 0.3rem;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+form input[type="submit"]:hover {
+    transform: scale(1.05);
 }
