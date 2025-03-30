@@ -16,3 +16,19 @@
 ![photo of the user in the web](./media/usuariWeb.png)
 
 ## Proves de l'aplicació
+
+### Prova d'inici de sessió
+Per iniciar sessió a l'aplicació web, cal accedir a la pàgina d'inici de sessió i introduir les credencials corresponents. En aquest cas, s'han utilitzat les següents:
+- Usuari: toni
+- Contrasenya: h3ll0!!
+
+Un cop introduïdes les credencials, es fa clic al botó "Accedir". Si les dades són correctes, es redirigeix a l'usuari al index de la web.
+
+Cas credencials correctes:
+
+![photo of the login with correct credentials](./media/prova1/credencialsCorrectes.png)
+
+Cas credencials incorrectes:
+En aquest cas, si s'introdueixen credencials incorrectes, com en el exemple, es quedarà en la mateixa pàgina.
+
+![photo of the login with incorrect credentials](./media/prova1/credencialsIncorrectes.png)
