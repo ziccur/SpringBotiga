@@ -85,5 +85,26 @@ Un cop hem eliminat tots els llibres de la base de dades (MariaDB), tornem a car
 ![consulta de llibres sense registres](./media/prova3/consulta3.png)
 Com podem veure a la imatge, quan no hi ha llibres registrats a la base de dades, la nostra aplicació web mostra un missatge indicant que no hi ha llibres disponibles. Això confirma que la funcionalitat de consulta maneja correctament el cas en què no hi ha registres.
 
+### Prov busca per ID
+
+Per fer aquesta prova he inserit dos registres de prova amb les id's 4 i 5 que seran les que buscarem a la pagina de busca per ID.
+
+![llibre afegit manualment a la BBDD](./media/prova4/consulta.png)
+
+Per accedir a la funcionalitat de cerca per ID, cal clicar al botó "Cerca un llibre per ID" que es troba en la part central de la pàgina.
+
+![buca la id4](./media/prova4/busca4.png)
+
+Un cop a la pagina de cerca per ID, introduïm la ID que volem buscar (en aquest cas 4) i fem clic al botó "Cerca". Si la ID existeix, es mostrarà la informació del llibre corresponent.
+
+Per acabar la prova buscarem tambe el llibre amb id 5, pero abans de fer aixo li canviarem la ID a la ID 5555 per comprobar que funciona correctament:
+
+![buscant la id 5555](./media/prova4/busca5555.png)
+
+Per ultim comprobem que surt si busquem una id que no existeix a la nostre BBDD:
+![buscant una id que no existeix](./media/prova4/busca1.png)
+
+
+
 
 
