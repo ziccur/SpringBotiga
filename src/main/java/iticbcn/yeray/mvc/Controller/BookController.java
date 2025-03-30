@@ -25,8 +25,10 @@ public class BookController {
     }
 
     @PostMapping("/index")
-    public String login(@RequestParam String usuari, 
-                        @RequestParam String password) {
+    public String login(
+            @RequestParam String usuari,
+            @RequestParam String password) {
+        
         if (usuari.equals("toni") && password.equals("h3ll0!!")) {
             return "redirect:/index";
         } else {
@@ -65,8 +67,7 @@ public class BookController {
             @RequestParam String editorial,
             @RequestParam @DateTimeFormat(pattern = "dd/MM/yyyy") LocalDate datapublicacio,
             @RequestParam String tematica,
-            @RequestParam String isbn,
-            Model model) {
+            @RequestParam String isbn) {
 
         Llibre llibre = new Llibre();
         llibre.setTitol(titol);
