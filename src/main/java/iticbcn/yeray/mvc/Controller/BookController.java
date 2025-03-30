@@ -26,8 +26,12 @@ public class BookController {
     }
 
     @PostMapping("/index")
-    public String login(@RequestParam String usuari, @RequestParam String password) {
-        return usuari.equals("toni") && password.equals("h3ll0!!") ? "redirect:/index" : "redirect:/";
+    public String login(
+            @RequestParam String usuari,
+            @RequestParam String password) {
+        return (usuari.equals("toni") && password.equals("h3ll0!!")) 
+                ? "redirect:/index" 
+                : "redirect:/";
     }
 
     @GetMapping("/index")
@@ -50,7 +54,6 @@ public class BookController {
     public String inputCerca(Model model) {
         model.addAttribute("llibreErr", true);
         model.addAttribute("message", "");
-        model.addAttribute("llibre", new Llibre());
         return "cercaid";
     }
 
@@ -65,7 +68,7 @@ public class BookController {
             Model model) {
 
         if (!llibreService.validateISBN(isbn)) {
-            model.addAttribute("error", "ISBN invàlid: Format correcte (10 o 13 dígits)");
+            model.addAttribute("error", "ISBN invàlid");
             return "inserir";
         }
 
@@ -82,10 +85,13 @@ public class BookController {
     }
 
     @PostMapping("/cercaid")
-    public String cercaId(@RequestParam int idLlibre, Model model) {
-        Optional<Llibre> llibreOpt = llibreService.findByIdLlibre(idLlibre);
-        if (llibreOpt.isPresent()) {
-            model.addAttribute("llibre", llibreOpt.get());
+    public String cercaId(
+            @RequestParam int idLlibre,
+            Model model) {
+
+        Optional<Llibre> llibre = llibreService.findByIdLlibre(idLlibre);
+        if (llibre.isPresent()) {
+            model.addAttribute("llibre", llibre.get());
             model.addAttribute("llibreErr", false);
         } else {
             model.addAttribute("message", "No hi ha cap llibre amb aquesta id");
