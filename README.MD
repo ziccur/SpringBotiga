@@ -5,6 +5,7 @@
 
 - Usuari: Yeray
 - Contrasenya: 1234
+
 ![photo of the user in the database](./media/usuariMariaDB.png)
 
 ### Usuari web:
