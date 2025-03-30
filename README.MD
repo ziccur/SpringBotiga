@@ -93,7 +93,7 @@ Per fer aquesta prova he inserit dos registres de prova amb les id's 4 i 5 que s
 
 Per accedir a la funcionalitat de cerca per ID, cal clicar al botó "Cerca un llibre per ID" que es troba en la part central de la pàgina.
 
-![buca la id4](./media/prova4/busca4.png)
+![buca la id4](./media/prova4/buca4.png)
 
 Un cop a la pagina de cerca per ID, introduïm la ID que volem buscar (en aquest cas 4) i fem clic al botó "Cerca". Si la ID existeix, es mostrarà la informació del llibre corresponent.
 
