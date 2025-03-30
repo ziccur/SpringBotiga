@@ -104,7 +104,13 @@ Per acabar la prova buscarem tambe el llibre amb id 5, pero abans de fer aixo li
 Per ultim comprobem que surt si busquem una id que no existeix a la nostre BBDD:
 ![buscant una id que no existeix](./media/prova4/busca1.png)
 
+### Codi de comprovació de errors
 
+Com ja em vist abans el nostre codi té un control d'errors per quan no es compleixen els requisits establerts a l'hora d'inserir un llibre a la base de dades (MariaDB). En aquest cas, si l'usuari intenta inserir un llibre amb un ISBN que no té 10 dígits, es mostrarà un missatge d'error. També hi ha una capa de seguretat amb la data de publicacio del llibre, ja que no es pot introduir una data sense el format que indica la pàgina.
+
+Aquest control d'errors es realitza mitjançant una validació en el codi abans d'intentar inserir el llibre a la base de dades. Si la validació falla, es mostrarà un missatge d'error a l'usuari.
+
+![validador ISBN](./media/validateISBN.png)
 
 
 
