@@ -1,6 +1,7 @@
 package iticbcn.yeray.mvc.Controller;
 
 import java.time.LocalDate;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -11,13 +12,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import iticbcn.yeray.mvc.Model.Llibre;
-import iticbcn.yeray.mvc.Repository.LlibreRepository;
+import iticbcn.yeray.mvc.Service.LlibreService;
 
 @Controller
 public class BookController {
 
     @Autowired
-    private LlibreRepository llibreRepository;
+    private LlibreService llibreService;
 
     @GetMapping("/")
     public String iniciar() {
@@ -36,7 +37,7 @@ public class BookController {
 
     @GetMapping("/consulta")
     public String consulta(Model model) {
-        model.addAttribute("llibres", llibreRepository.findAll());
+        model.addAttribute("llibres", llibreService.findAll());
         return "consulta";
     }
 
@@ -60,7 +61,13 @@ public class BookController {
             @RequestParam String editorial,
             @RequestParam @DateTimeFormat(pattern = "dd/MM/yyyy") LocalDate datapublicacio,
             @RequestParam String tematica,
-            @RequestParam String isbn) {
+            @RequestParam String isbn,
+            Model model) {
+
+        if (!llibreService.validateISBN(isbn)) {
+            model.addAttribute("error", "ISBN invàlid: Format correcte (10 o 13 dígits)");
+            return "inserir";
+        }
 
         Llibre llibre = new Llibre();
         llibre.setTitol(titol);
@@ -70,16 +77,20 @@ public class BookController {
         llibre.setTematica(tematica);
         llibre.setIsbn(isbn);
 
-        llibreRepository.save(llibre);
+        llibreService.save(llibre);
         return "redirect:/consulta";
     }
 
     @PostMapping("/cercaid")
     public String cercaId(@RequestParam int idLlibre, Model model) {
-        Llibre llibre = llibreRepository.findById(idLlibre).orElse(null);
-        model.addAttribute("llibreErr", llibre == null);
-        model.addAttribute("message", llibre == null ? "No hi ha cap llibre amb aquesta id" : "");
-        model.addAttribute("llibre", llibre);
+        Optional<Llibre> llibreOpt = llibreService.findByIdLlibre(idLlibre);
+        if (llibreOpt.isPresent()) {
+            model.addAttribute("llibre", llibreOpt.get());
+            model.addAttribute("llibreErr", false);
+        } else {
+            model.addAttribute("message", "No hi ha cap llibre amb aquesta id");
+            model.addAttribute("llibreErr", true);
+        }
         return "cercaid";
     }
 
