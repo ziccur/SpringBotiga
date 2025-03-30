@@ -58,4 +58,32 @@ Aquesta secció comproba que pasa quan intentem inserir un llibre amb un ISBN qu
 
 El que pasarà a continuacio és que no s'afegirà el nostre llibre a la BBDD i pasarà igual que amb el intent fallit de login, en quedarem a la mateixa pagina d'inserció de llibres sense cap canvi.
 
+### Prova consulta de llibres
+
+#### Consulta afegint llibres
+La nostre web compta amb un apartat de consulta de libres "/consulta" on la que podem veure tots els llibres que tenim registrats a la nostra base de dades (MariaDB). Per accedir a aquesta funcionalitat, cal clicar al botó "Consulta la llista de llibres" que es troba en la part central de la pàgina.
+
+Aquest seria el seu aspecte:
+![consulta de llibres a la web](./media/prova3/consulta1.png)
+
+Per provar que funciona correctament afegirem un nou registre manualment desde la eina DBeaver i comprovarem que surt a la nostra web.
+
+![llibre afegit manualment a la BBDD](./media/prova3/DBeaverAfegirLlibre.png)
+
+Un cop afegit el llibre manualment a la base de dades, tornem a carregar la pàgina de consulta de llibres a la web per veure si apareix el nou registre.
+![consulta de llibres actualitzada](./media/prova3/consulta2.png)
+
+Com podem observar a la imatge, el llibre que hem afegit manualment a la base de dades (MariaDB) ara apareix en la llista de llibres de la nostra aplicació web, confirmant així que la funcionalitat de consulta està treballant correctament.
+
+#### Consulta sense llibres
+
+Per aquesta seccio borrarem tots els llibres a veure si la nostra web funciona correctament sense cap llibre registrat. Per fer-ho, utilitzarem la eina DBeaver per eliminar tots els registres de la taula "llibres".
+![eliminació de llibres a la BBDD](./media/prova3/DBeaverEliminarLlibres.png)
+
+Un cop hem eliminat tots els llibres de la base de dades (MariaDB), tornem a carregar la pàgina de consulta de llibres a la web per veure si es maneja correctament el cas en què no hi ha llibres registrats.
+
+![consulta de llibres sense registres](./media/prova3/consulta3.png)
+Com podem veure a la imatge, quan no hi ha llibres registrats a la base de dades, la nostra aplicació web mostra un missatge indicant que no hi ha llibres disponibles. Això confirma que la funcionalitat de consulta maneja correctament el cas en què no hi ha registres.
+
+
 
