@@ -112,5 +112,18 @@ Aquest control d'errors es realitza mitjançant una validació en el codi abans 
 
 ![validador ISBN](./media/validateISBN.png)
 
+## Preguntes 
 
+### Per què al servei estem utilitzant mètodes que no hem declarat explícitament al repositori? Com és possible?
 
+Perquè el repositori utilitza Spring Data JPA, que genera automàticament els mètodes com findByTitol o findAll sense necessitat de codificar-los. Això passa perquè les interfícies com JpaRepository ja tenen aquestes funcions implementades per defecte, basant-se en el nom dels mètodes que posem. És com una màgia que fa Spring per estalviarnos feina.
+
+### El repositori pot elegir fer l’extends de les interfícies PagingAndSortingRepository o de JpaRepository. En què es diferencien aquestes dues amb la interfície CrudRepository?
+
+La CrudRepository és la més simple, té el bàsic per fer CRUD (crear, llegir, actualitzar, eliminar). La PagingAndSortingRepository li afegeix lo de dividir resultats en pàgines i ordenar-los. La JpaRepository inclou tot el de les altres dues més coses específiques de JPA, com esborrar en batch o fer flush. Jo triaria JpaRepository per tenir totes les opcions.
+
+### Què significa Optional<Classe> i per a què serveix?
+Optional<Classe> és una classe de Java que representa un valor que pot o no estar present. És com un contenidor que pot tenir un valor o estar buit. Això és útil per evitar problemes de nulls i fer el codi més segur.
+
+### Per què el controlador utilitza el servei i no la seva implementació? 
+El controlador usa el servei perquè aquest s'encarrega de la lògica complicada (com accedir a dades o fer validacions). Si el controlador parlés directament amb el repositori, estarien barrejant coses i seria un lío canviar-ho després. Amb el servei, tot queda separat i és més fàcil mantenir o provar. 
