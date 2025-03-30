@@ -25,15 +25,8 @@ public class BookController {
     }
 
     @PostMapping("/index")
-    public String login(
-            @RequestParam String usuari,
-            @RequestParam String password) {
-        
-        if (usuari.equals("toni") && password.equals("h3ll0!!")) {
-            return "redirect:/index";
-        } else {
-            return "redirect:/";
-        }
+    public String login(@RequestParam String usuari, @RequestParam String password) {
+        return usuari.equals("toni") && password.equals("h3ll0!!") ? "redirect:/index" : "redirect:/";
     }
 
     @GetMapping("/index")
@@ -82,23 +75,11 @@ public class BookController {
     }
 
     @PostMapping("/cercaid")
-    public String cercaId(
-            @RequestParam int idLlibre,
-            Model model) {
-
-        String message = "";
-        boolean llibreErr = false;
-
+    public String cercaId(@RequestParam int idLlibre, Model model) {
         Llibre llibre = llibreRepository.findById(idLlibre).orElse(null);
-        if (llibre != null) {
-            model.addAttribute("llibre", llibre);
-        } else {
-            message = "No hi ha cap llibre amb aquesta id";
-            llibreErr = true;
-        }
-
-        model.addAttribute("message", message);
-        model.addAttribute("llibreErr", llibreErr);
+        model.addAttribute("llibreErr", llibre == null);
+        model.addAttribute("message", llibre == null ? "No hi ha cap llibre amb aquesta id" : "");
+        model.addAttribute("llibre", llibre);
         return "cercaid";
     }
 
