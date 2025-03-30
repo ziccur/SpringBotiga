@@ -26,13 +26,11 @@ public class BookController {
 
     @PostMapping("/index")
     public String login(@RequestParam String usuari, 
-                        @RequestParam String password, 
-                        Model model) {
-
+                        @RequestParam String password) {
         if (usuari.equals("toni") && password.equals("h3ll0!!")) {
-            return "index";
+            return "redirect:/index";
         } else {
-            return "login";
+            return "redirect:/";
         }
     }
 
@@ -62,12 +60,12 @@ public class BookController {
 
     @PostMapping("/inserir")
     public String inserir(
-            @RequestParam(name = "titol") String titol,
-            @RequestParam(name = "autor") String autor,
-            @RequestParam(name = "editorial") String editorial,
-            @RequestParam(name = "datapublicacio") @DateTimeFormat(pattern = "dd/MM/yyyy") LocalDate datapublicacio,
-            @RequestParam(name = "tematica") String tematica,
-            @RequestParam(name = "isbn") String isbn,
+            @RequestParam String titol,
+            @RequestParam String autor,
+            @RequestParam String editorial,
+            @RequestParam @DateTimeFormat(pattern = "dd/MM/yyyy") LocalDate datapublicacio,
+            @RequestParam String tematica,
+            @RequestParam String isbn,
             Model model) {
 
         Llibre llibre = new Llibre();
@@ -79,13 +77,12 @@ public class BookController {
         llibre.setIsbn(isbn);
 
         llibreRepository.save(llibre);
-        model.addAttribute("llibres", llibreRepository.findAll());
-        return "consulta";
+        return "redirect:/consulta";
     }
 
     @PostMapping("/cercaid")
     public String cercaId(
-            @RequestParam(name = "idLlibre") int idLlibre,
+            @RequestParam int idLlibre,
             Model model) {
 
         String message = "";
