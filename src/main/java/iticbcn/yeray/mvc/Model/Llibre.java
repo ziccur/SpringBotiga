@@ -1,57 +1,42 @@
 package iticbcn.yeray.mvc.Model;
 
+import java.time.LocalDate;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Entity
+@Table(name = "llibre")
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class Llibre {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idLlibre;
+
+    @Column(nullable = false)
     private String titol;
+
+    @Column(nullable = false)
     private String autor;
+
+    @Column(nullable = false)
     private String editorial;
-    private String datapublicacio;
+
+    @Column(name = "datapublicacio", nullable = false)
+    private LocalDate datapublicacio;
+
+    @Column(nullable = false)
     private String tematica;
 
-    public Llibre() {}
-    
-    public Llibre(int idLlibre, String titol, String autor, String editorial, String datapublicacio, String tematica) {
-        this.idLlibre = idLlibre;
-        this.titol = titol;
-        this.autor = autor;
-        this.editorial = editorial;
-        this.datapublicacio = datapublicacio;
-        this.tematica = tematica;
-    }
-    public int getIdLlibre() {
-        return idLlibre;
-    }
-    public void setIdLlibre(int idLlibre) {
-        this.idLlibre = idLlibre;
-    }
-    public String getTitol() {
-        return titol;
-    }
-    public void setTitol(String titol) {
-        this.titol = titol;
-    }
-    public String getAutor() {
-        return autor;
-    }
-    public void setAutor(String autor) {
-        this.autor = autor;
-    }
-    public String getEditorial() {
-        return editorial;
-    }
-    public void setEditorial(String editorial) {
-        this.editorial = editorial;
-    }
-    public String getDatapublicacio() {
-        return datapublicacio;
-    }
-    public void setDatapublicacio(String datapublicacio) {
-        this.datapublicacio = datapublicacio;
-    }
-    public String getTematica() {
-        return tematica;
-    }
-    public void setTematica(String tematica) {
-        this.tematica = tematica;
-    }    
+    @Column(unique = true, nullable = false)
+    private String isbn;
 }
